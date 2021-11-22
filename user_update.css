@@ -1,0 +1,23 @@
+.update_form {
+    font-family: "Bebas Neue";
+    font-size: 30px;
+}
+
+.update_input {
+    width: 150px;
+    height: 30px;
+    font-size: 25px;
+    font-family: "Bebas Neue";
+}
+
+.check_btn {
+    width: 100px;
+    height: 30px;
+    font-size: 20px;
+    font-family: "Bebas Neue";
+    color: #CC0000;
+    background-color: black;
+    border: 1px solid black;
+    cursor: pointer;
+    border-radius: 5%;
+}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <script src="check.js"></script>
+    <link rel="stylesheet" type="text/css" href="signUp_form.css">
+</head>
+<body>
+    <form action="signUp.jsp" name="signUpPage" method="post" onsubmit="check()">
+        <table>
+            <tr>
+                <td class="signUp_form">
+                    ID
+                </td>
+                <td>
+                    <input class="signUp_input" type="text" id="id" name="id">
+                </td>
+                <td>
+                    <input class="check_btn" type="button" value="check" onclick="idCheck()">
+                </td>
+            </tr>
+            <tr>
+                <td class="signUp_form">
+                    PASSWORD
+                </td>
+                <td>
+                    <input class="signUp_input" type="password" name="pw">
+                </td>
+            </tr>
+            <tr>
+                <td class="signUp_form">
+                    CHECK PASSWORD
+                </td>
+                <td>
+                    <input class="signUp_input" type="password" name="pw2">
+                </td>
+            </tr>
+            <tr>
+                <td class="signUp_form">
+                    NAME
+                </td>
+                <td>
+                    <input class="signUp_input" type="text" name="name">
+                </td>
+            </tr>
+            <tr>
+                <td class="signUp_form">
+                    AUTH
+                </td>
+                <td class="checkbox">
+                    <input type="checkbox" name="auth" value="2" onclick="checkOnlyOne(this)"> PART MANAGER 
+                    <input type="checkbox" name="auth" value="3" onclick="checkOnlyOne(this)"> TEAM MEMBER
+                </td>
+            </tr>
+        </table>
+        <input type="hidden" id="isCheck" value="">
+        <input class="check_btn" type="submit" value="confirm">
+        <input class="check_btn" type="button" value="cancel" onclick="location.href='main_page.jsp'">
+    </form>
+</body>
+</html>
