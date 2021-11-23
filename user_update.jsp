@@ -17,7 +17,9 @@
 </head>
 <body>
     <%
-            Cookie[] c = request.getCookies();
+        request.setCharacterEncoding("euc-kr");
+
+        Cookie[] c = request.getCookies();
         if (c != null) {
             for (Cookie cf : c) {
                 if (cf.getName().equals("id_value")) {
@@ -49,14 +51,14 @@
             String user_pw = rs.getString("password");
             String user_name = rs.getString("name");
     %>
-<form action="update_info.jsp" name="updateInfoPage" method="post" onsubmit="updateCheck()">
+<form action="update_info.jsp" name="updateInfoPage" method="post" onsubmit="return updateCheck()">
     <table>
             <tr>
                 <td class="update_form">
                     NAME
                 </td>
                 <td>
-                    <input class="update_input" type="text" value=<%=user_name %> name="name">
+                    <input class="update_input" type="text" name="name" value=<%=user_name %> >
                 </td>
             </tr>
             <tr>
@@ -64,7 +66,7 @@
                     ID
                 </td>
                 <td>
-                    <input class="update_input" type="text" value=<%=user_id %> id="id" name="id">
+                    <input class="update_input" type="text" id="id" name="id" value=<%=user_id %> >
                 </td>
                 <td>
                     <input class="check_btn" type="button" value="check" onclick="idDuplicateCheck()">
@@ -75,7 +77,7 @@
                     PASSWORD
                 </td>
                 <td>
-                    <input class="update_input" type="password" value=<%=user_pw %> name="pw">
+                    <input class="update_input" type="password" name="pw" value=<%=user_pw %> >
                 </td>
             </tr>
             <tr>

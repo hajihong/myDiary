@@ -23,12 +23,13 @@
     Class.forName("com.mysql.jdbc.Driver");
     conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/diaryDB", "ubuntu","1234");
 
-    String sql = "UPDATE user SET id=?, password=? WHERE id=?";
+    String sql = "UPDATE user SET id=?, password=?, name =? WHERE id=?";
     
     pstmt = conn.prepareStatement(sql);
     pstmt.setString(1, id_value);
     pstmt.setString(2, pw_value);
-    pstmt.setString(3, id);
+    pstmt.setString(3, name_value);
+    pstmt.setString(4, id);
     int rs = pstmt.executeUpdate();
 
     if (rs == 1) {

@@ -25,7 +25,7 @@
     conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/diaryDB", "ubuntu","1234");
 
     // 데이터베이스 명령 전달
-    String sql = "INSERT INTO user(id, password, name, auth) VALUES (?,?,?,?);";
+    String sql = "INSERT INTO user(id, password, name, auth) VALUES (?,?,?,?)";
     pstmt = conn.prepareStatement(sql);
     pstmt.setString(1, id_value);
     pstmt.setString(2, pw_value);
@@ -41,7 +41,7 @@
 <script>
     if (<%=isSignUp%> == true) {
         alert("회원가입 성공!");
-        location.href= "login_form.jsp";
+        location.href= "main_page.jsp";
     } else if (<%=isSignUp%> == false) {
         alert("가입에 실패하였습니다.");
         location.href= "signUp_from.html";

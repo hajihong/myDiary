@@ -29,7 +29,13 @@ function check() {
         return false;
     }
 
-    if(document.singUpPage.auth.value == "") {
+    var check1 = document.getElementById("part");
+    var check2 = document.getElementById("team");
+
+    var check1Result = check1.getAttribute("checked");
+    var check2Result = check2.getAttribute("checked");
+    
+    if(check1Result == false && check2Result == false) {
         alert("권한을 입력하세요");
         return false;
     }

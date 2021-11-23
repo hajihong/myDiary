@@ -24,6 +24,8 @@
             }
         }
     }
+    // session 기반 쿠키 생성
+    // 예외처리 seession login_form.....
 
     String id = (String)session.getAttribute("id_value");
 
@@ -38,6 +40,8 @@
     pstmt = conn.prepareStatement(sql);
     pstmt.setString(1, id);
     rs = pstmt.executeQuery();
+
+    
 %>
 <div class="container">
     <section>

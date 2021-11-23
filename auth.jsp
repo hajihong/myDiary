@@ -3,6 +3,7 @@
 <%@ page import="java.sql.PreparedStatement"%>
 <%@ page import="java.sql.DriverManager"%>
 <%@ page import="java.sql.ResultSet"%>
+<%@ page session="true"%>
 
 <%-- 데이터베이스 검증 --%>
 <%

@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="signUp_form.css">
 </head>
 <body>
-    <form action="signUp.jsp" name="signUpPage" method="post" onsubmit="check()">
+    <form action="signUp.jsp" name="signUpPage" method="post" onsubmit="return check()">
         <table>
             <tr>
                 <td class="signUp_form">
@@ -51,7 +51,7 @@
                     AUTH
                 </td>
                 <td class="checkbox">
-                    <input type="checkbox" name="auth" value="2" onclick="checkOnlyOne(this)"> PART MANAGER 
+                    <input type="checkbox" name="auth" value="2" onclick="checkOnlyOne(this)" checked> PART MANAGER 
                     <input type="checkbox" name="auth" value="3" onclick="checkOnlyOne(this)"> TEAM MEMBER
                 </td>
             </tr>
