@@ -28,13 +28,15 @@
     pstmt.setString(2, pw_value);
     rs = pstmt.executeQuery();
 
+    String s_name = "";
+
     if(rs.next()) {
         isLogin = true;
         session.setAttribute("id_value", id_value);
-        session.setAttribute("pw_value", pw_value);
+        String id_str = session.getId();
 
         if (login_check != null) {
-            Cookie c = new Cookie("id_value", id_value);
+            Cookie c = new Cookie("id_value", id_str);
             c.setMaxAge(60 * 2);
             c.setPath("/");
             response.addCookie(c);

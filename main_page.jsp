@@ -15,19 +15,11 @@
 </head>
 <body>
 <%
-    Cookie[] c = request.getCookies();
-    if (c != null) {
-        for (Cookie cf : c) {
-            if (cf.getName().equals("id_value")) {
-                String id_value = cf.getValue();
-                session.setAttribute("id_value", id_value);
-            }
-        }
-    }
-    // session 기반 쿠키 생성
-    // 예외처리 seession login_form.....
-
     String id = (String)session.getAttribute("id_value");
+
+    if (id == null) {
+        response.sendRedirect("login_form.jsp");
+    };
 
     Connection conn = null;
     PreparedStatement pstmt = null;
@@ -40,8 +32,6 @@
     pstmt = conn.prepareStatement(sql);
     pstmt.setString(1, id);
     rs = pstmt.executeQuery();
-
-    
 %>
 <div class="container">
     <section>
