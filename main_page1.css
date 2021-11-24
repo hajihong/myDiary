@@ -130,3 +130,7 @@ main {
     padding-left: 20px;
     border: 1px solid black;
 }
+
+#signup {
+    display: none;
+}

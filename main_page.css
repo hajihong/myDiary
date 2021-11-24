@@ -70,8 +70,7 @@ header {
 }
 
 main {
-    background-color: teal;
-    display: flex;
+    /* display: flex; */
     flex: 1;
     width: calc(100% - 150px);
     height: 100%;
@@ -101,8 +100,37 @@ main {
     font-weight: bold;
 }
 
+#diary_contents {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
 .wrap_box {
     display: flex;
     align-items: center;
-    justify-content: center;
+    font-family: "Bebas Neue";
+    font-size: 50px;
+    padding-top: 10px;
+}
+
+.delete_box {
+    padding-left: 30px;
+}
+
+.date_box {
+    margin-left: 40px;
+    width: 200px;
+    border: 1px solid black;
+    text-align: center;
+}
+
+.main_box {
+    width: 500px;
+    padding-left: 20px;
+    border: 1px solid black;
+}
+
+#signup {
+    display: none;
 }

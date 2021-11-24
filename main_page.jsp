@@ -3,6 +3,8 @@
 <%@ page import="java.sql.PreparedStatement"%>
 <%@ page import="java.sql.DriverManager"%>
 <%@ page import="java.sql.ResultSet"%>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="java.util.List"%>
 
 <!DOCTYPE html>
 <html lang="kr">
@@ -10,7 +12,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="main_page1.css">
+    <link rel="stylesheet" type="text/css" href="main_page.css">
     <title>메인페이지</title>
 </head>
 <body>
@@ -24,6 +26,8 @@
     Connection conn = null;
     PreparedStatement pstmt = null;
     ResultSet rs = null;
+    ResultSet rs1 = null;
+    ResultSet rs2 = null;
 
     Class.forName("com.mysql.jdbc.Driver");
     conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/diaryDB", "ubuntu","1234");
@@ -32,7 +36,32 @@
     pstmt = conn.prepareStatement(sql);
     pstmt.setString(1, id);
     rs = pstmt.executeQuery();
+
+    String auth = null;
+
+    if(rs.next()) {
+        auth = rs.getString("auth");
+    }
+
+    String user_list = null;
+
+    String sql2 = "SELECT * FROM user";
+    pstmt = conn.prepareStatement(sql2);
+    rs1 = pstmt.executeQuery();
+
+    ArrayList userList = new ArrayList();
+
+    while(rs1.next()){
+        userList.add((String)rs1.getString(3));
+    };
+
+    String sql3 = "SELECT DATE_FORMAT(date, '%Y-%m-%d'), main_info from main_diary WHERE user_id =?";
+    pstmt = conn.prepareStatement(sql3);
+    pstmt.setString(1, id);
+    rs2 = pstmt.executeQuery();
+
 %>
+
 <div class="container">
     <section>
         <div class="user_id">
@@ -46,37 +75,10 @@
             <div class="user_btn_wrap">
                 <input class="user_btn" type="button" onclick="location.href='user_update.jsp'" value="update Info"/>
             </div>
-
-        <% while(rs.next()) { %>
-            <% if(rs.getInt(1) == 1) { %>
-                <div class="user_btn_wrap">
-                    <input class="user_btn" type="button" onclick="location.href='signUp_form.html'" value="signUp"/>
-                </div>
-            <% 
-            pstmt.close();
-            String sql2 = "SELECT * FROM user"; 
-            pstmt = conn.prepareStatement(sql2);
-            rs = pstmt.executeQuery();
-            %>
-            
-            <% while(rs.next()) { %>
-                <div class="user_list"><%= rs.getString(2) %></div>
-            <% } %>
-            <% } else if (rs.getInt(1) == 2) { %>
-
-            <% 
-            pstmt.close();
-            String sql2 = "SELECT * FROM user"; 
-            pstmt = conn.prepareStatement(sql2);
-            rs = pstmt.executeQuery();
-            %>
-
-            <% while(rs.next()) { %>
-                <div><%= rs.getString(2) %></div>
-                <% } %>
-            <% } else { %>
-            <% } %>
-        <% } %>
+            <div class="user_btn_wrap">
+                <input id="signup" class="user_btn" type="button" onclick="location.href='signUp_form.html'" value="signUp"/>
+            </div>
+        <div id="userList"></div>
     </section>
 
     <header>
@@ -98,25 +100,34 @@
     </header>
     <main>
     <div id="diary_contents">
-        <%
-        pstmt.close();
-        String sql3 = "SELECT DATE_FORMAT(date, '%Y-%m-%d'), main_info from main_diary WHERE user_id =?";
-        pstmt = conn.prepareStatement(sql3);
-        pstmt.setString(1, id);
-        rs = pstmt.executeQuery();
-        %>
-
-        <% while(rs.next()) { %>
-        <div class="wrap_box">
-        <div class="delete_box">X</div>
-        <div class="date_box"><%= rs.getString(1) %></div>
-        <div class="main_box">
-        <%= rs.getString(2) %>
-        </div>
-        </div>
-        <% } %>
     </div>
     </main>
 </div>
+<script>
+
+    if('<%= auth %>' == 1 || '<%= auth %>' ==2) {
+
+    var array="<%=userList%>";
+    array = array.replace("[", "");
+    array = array.replace("]", "");
+    array = array.split(",");
+
+    for (i = 0; i < array.length; i++) {
+        temp = document.createElement('div');
+        temp.className = 'user_list';
+        temp.innerHTML = array[i];
+        document.getElementById("userList").appendChild(temp);
+        };
+    }
+
+
+
+    if('<%= auth %>' == 1) {
+        var admin = document.getElementById("signup");
+        admin.style.display = "block"; 
+    };
+
+
+</script>
 </body>
 </html>
